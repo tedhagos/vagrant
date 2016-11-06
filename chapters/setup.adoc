@@ -1,0 +1,52 @@
+
+== Setup
+
+
+=== OSX
+
+----
+brew update
+brew tap caskroom/cask
+brew install brew-cask
+brew cask install vagrant virtualbox
+----
+
+=== Linux
+
+----
+sudo apt-get update
+sudo apt-get upgrade
+sudo -apt-get install vagrant virtualbox-dkms
+----
+
+
+=== Windows
+
+You can install either (a) install binaries for both vagrant and
+virtualbox or (b) you can get them via the chocolatey/nuget package
+manager.
+
+To install using precompiled binaries:
+
+1. Download the Oracle virtualbox installer from the
+   https://www.virtualbox.org/wiki/Downloads[Virtualbox website]
+2. Download the vagrant installer from the
+   https://www.vagrantup.com/downloads.html[VagrantUp website]
+3. Install virtualbox first, then install vagrant. Install both
+   software the way you would install any other software Windows.
+   Double click the installer and follow the installation wizards
+
+
+Install chocolatey.
+
+Download and install chocolatey, you can get the installer from the
+http://chocolatey.org[Chocolatey website]. Once you have chocolatey up
+and running, you can install vagrant and virtualbox using the
+following command
+
+----
+cinst -y virtualbox vagrant
+----
+
+
+

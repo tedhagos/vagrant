@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?asciidoc-toc?>
+<?asciidoc-numbered?>
+<book xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink" version="5.0" xml:lang="en">
+<info>
+<title>Vagrant</title>
+<date>October 2016</date>
+<author>
+<personname>
+<firstname>Ted</firstname>
+<surname>Hagos</surname>
+</personname>
+<email>ted@thelogbox.com</email>
+</author>
+<authorinitials>TGH</authorinitials>
+<revhistory>
+<revision>
+<revnumber>0.1</revnumber>
+<date>October 2016</date>
+<authorinitials>TGH</authorinitials>
+</revision>
+</revhistory>
+</info>
+<chapter xml:id="setup">
+<title>Setup</title>
+<section xml:id="osx">
+<title>OSX</title>
+<screen>brew update
+brew tap caskroom/cask
+brew install brew-cask
+brew cask install vagrant virtualbox</screen>
+</section>
+<section xml:id="linux">
+<title>Linux</title>
+<screen>sudo apt-get update
+sudo apt-get upgrade
+sudo -apt-get install vagrant virtualbox-dkms</screen>
+</section>
+<section xml:id="windows">
+<title>Windows</title>
+<simpara>You can install either (a) install binaries for both vagrant and
+virtualbox or (b) you can get them via the chocolatey/nuget package
+manager.</simpara>
+<simpara>To install using precompiled binaries:</simpara>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>Download the Oracle virtualbox installer from the
+<link xl:href="https://www.virtualbox.org/wiki/Downloads">Virtualbox website</link></simpara>
+</listitem>
+<listitem>
+<simpara>Download the vagrant installer from the
+<link xl:href="https://www.vagrantup.com/downloads.html">VagrantUp website</link></simpara>
+</listitem>
+<listitem>
+<simpara>Install virtualbox first, then install vagrant. Install both
+software the way you would install any other software Windows.
+Double click the installer and follow the installation wizards</simpara>
+</listitem>
+</orderedlist>
+<simpara>Install chocolatey.</simpara>
+<simpara>Download and install chocolatey, you can get the installer from the
+<link xl:href="http://chocolatey.org">Chocolatey website</link>. Once you have chocolatey up
+and running, you can install vagrant and virtualbox using the
+following command</simpara>
+<screen>cinst -y virtualbox vagrant</screen>
+</section>
+</chapter>
+</book>

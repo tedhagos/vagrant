@@ -1,0 +1,13 @@
+:stylesheet: style.css
+:doctype: book
+:Author Initials: TGH
+:Copyright: (c) Ted Hagos 2016
+
+
+= Vagrant
+Ted Hagos <ted@thelogbox.com>
+v0.1, October 2016
+
+include::chapters/setup.adoc[]
+
+
