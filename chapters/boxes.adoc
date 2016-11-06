@@ -1,0 +1,89 @@
+== Vagrant Boxes
+
+Working with vagrant almost always means working on the command line.
+You really need to be comfortable working on a terminal window.
+Invoking  the vagrant command shows a help file which also lists the
+most common commands like box, init, destroy, halt etc. Most of these
+commands though have their own sub-commands. It could be confusing at
+first but as you work with vagrant and get familiar with it, you'll
+find that the commands (and sub-commands) are structured quite
+sensibly.  
+
+Let's try out our first command.
+
+----
+vagrant box list
+----
+
+The command above will show you all the boxes you already have
+downloaded in your machine.  Nothing will show up if you have just
+installed vagrant,  so let's get our first box.
+
+NOTE: A box is some sort of an operating system image. If you have
+performed complete disk backups of your operating system before, a box
+is similar to that. It is a snapshot of an operating system. Snapshots
+are taken and saved typically because you would like to restore them
+at a later time, either on the same hardware or a different one.
+
+=== Adding a boxes
+
+To get an existing box, we'll use the vagrant box add command. The structure of
+that command looks like the one below
+
+----
+vagrant box add [what you want to call it] [url of box]
+----  
+
+So, for our first box, we'll get a 32 bit ubuntu box, we will call it
+precise32.
+
+----
+vagrant box add precise32 http://files.vagrantup.com/precise32.box
+----
+
+.Adding a box
+image::images/book/vagrant-box-add.png[]
+
+=== Where to get vagrant boxes
+
+Vagrant boxes are really just image files, so you can get it from any
+where  or anyone who makes their vagrant boxes available. Be careful
+when getting boxes from the internnet, make sure the site is
+reputable. Having said that, here are two popular sites that makes
+vagrant boxes available 
+
+- http://files.vagrantup.com
+- http://vagrantbox.es
+
+=== Deleting and Renaming Boxes
+
+When you longer need the OS image, you can delete the boxes in order
+to free up disk space. By the way, vagrant boxes are located in (a)
+`~/.vagrant.d/boxes` on macOS and Linux and (b)
+`%USERHOME%\.vagrant.d\boxes` on Windows machines.
+
+
+.How to delete vagrant boxes
+----
+vagrant box list
+vagrant box remove <name of the box>
+----
+
+.Renaming a  box
+----
+vagrant box repackage
+----
+
+=== Creating and Publishing a Box
+
+
+
+
+
+
+
+
+
+
+
+

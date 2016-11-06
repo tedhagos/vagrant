@@ -1,0 +1,93 @@
+== Vagrant Projects
+
+A vagrant box is not the same as a vagrant project. Remember that a
+box is just an image of the operating system. You can create many
+projects using the same image. But we will need a box before we can
+create project.  
+
+You can use the precise32 box we downloaded earlier for multiple
+projects. This is actually one of the main use cases for vagrant. You
+can isolate the libraries and configurations of your projects. That
+way, you always have a clean baseline box. 
+
+To create our first project, we need to do (a) create a folder for our
+project (b) run `vagrant init` inside the project folder and (c) edit
+the vagrant file if we want to alter some of the default settings of
+vagrant
+
+.Creating a project
+....
+mkdir ~/vms/myproject && cd ~/vms/myproject
+vagrant init precise32 # <1>
+....
+<1> This will create a file aptly named `Vagrantfile` on the folder
+where the vagrant init command was ran. For now, we will simply use
+the default Vagrant file. We will customize that file in later
+sections
+
+=== Start, Suspend, Resume, Stop and Destroy
+
+Start the vagrant project, we need to (a) switch to the vagrant
+project folder and (b) start the VM with the vagrant up command
+
+.Starting a vagrant project
+....
+cd ~/vms/myproject && vagrant up
+....
+
+TIP: If you are used to working with virtualbox and any other hypervisor,
+you might be wondering why we don't see the usual window of
+virtualbox. Vagrant, by default runs in headless mode that is why we
+don't see any GUI interfaces to it. You can work with the virtualbox
+GUI if you really want (need) to, but working on the CLI is the
+idiomatic way of working with vagrant.
+
+
+
+.Managing vagrant boxes
+....
+vagrant suspend  # <1>
+vagrant resume # <2>
+vagrant halt # <3> 
+vagrant destroy # <4>
+....
+<1> Puts the machine to sleep mode
+<2> Wake up from suspend
+<3> Graceful shutdown
+<4> This is like `halt`, but it also destroys the VM itself
+
+[NOTE]
+.Turning the GUI on
+====
+If you still want to see the GUI of the virtualbox session, you
+can do the following
+
+1. Exit the existing virtual machine session, if you are in one
+2. Edit the Vagrantfile configuration
+3. Look for the config.vm.provider entry and uncomment that section
+4. Reload the virtual machine using the command vagrant reload
+====
+
+
+
+
+=== Getting into your box
+
+Start the VM if it isn't already started, then login to the virtual
+machine using `vagrant ssh`
+
+....
+cd ~/vms/myproject && vagrant up # <1>
+vagrant ssh <2>
+....
+<1> cd to the vagrant project and invoke `vagrant up` to boot the
+machine
+<2> use ssh to login to your machine
+
+NOTE: If you would like to use another ssh client such as PuTTy, you
+may. Login to your machine via PuTTy using *username*=_vagrant_
+*password*=_vagrant_
+
+
+
+

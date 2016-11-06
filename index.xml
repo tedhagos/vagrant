@@ -23,6 +23,19 @@
 </info>
 <chapter xml:id="setup">
 <title>Setup</title>
+<simpara>Vagrant requires requires either VirtualBox, VMWare or any other
+hypervisor virtualization. In our case, we&#8217;ll use VirtuaBox. The
+installation process is (a) install VirtualBox then (b) install
+Vagrant.</simpara>
+<simpara>There are a couple of ways to install these software. It depends on
+your operating system and what kind of package manager you are using.
+OSX has HomeBrew and MacPorts, Linux has aptitude, rpm, yum etc. and
+Windows has chocolatey.</simpara>
+<simpara>The most straightforward way is to install
+virtualbox and vagrant using pre-compiled binaries. The process
+involves nothing more than downloading these binaries, double-clicking
+them and following the wizards. Just like how you would install any
+other app in your system.</simpara>
 <section xml:id="osx">
 <title>OSX</title>
 <screen>brew update
@@ -63,6 +76,199 @@ Double click the installer and follow the installation wizards</simpara>
 and running, you can install vagrant and virtualbox using the
 following command</simpara>
 <screen>cinst -y virtualbox vagrant</screen>
+</section>
+</chapter>
+<chapter xml:id="vagrant_boxes">
+<title>Vagrant Boxes</title>
+<simpara>Working with vagrant almost always means working on the command line.
+You really need to be comfortable working on a terminal window.
+Invoking  the vagrant command shows a help file which also lists the
+most common commands like box, init, destroy, halt etc. Most of these
+commands though have their own sub-commands. It could be confusing at
+first but as you work with vagrant and get familiar with it, you&#8217;ll
+find that the commands (and sub-commands) are structured quite
+sensibly.</simpara>
+<simpara>Let&#8217;s try out our first command.</simpara>
+<screen>vagrant box list</screen>
+<simpara>The command above will show you all the boxes you already have
+downloaded in your machine.  Nothing will show up if you have just
+installed vagrant,  so let&#8217;s get our first box.</simpara>
+<note>
+<simpara>A box is some sort of an operating system image. If you have
+performed complete disk backups of your operating system before, a box
+is similar to that. It is a snapshot of an operating system. Snapshots
+are taken and saved typically because you would like to restore them
+at a later time, either on the same hardware or a different one.</simpara>
+</note>
+<section xml:id="adding_a_boxes">
+<title>Adding a boxes</title>
+<simpara>To get an existing box, we&#8217;ll use the vagrant box add command. The structure of
+that command looks like the one below</simpara>
+<screen>vagrant box add [what you want to call it] [url of box]</screen>
+<simpara>So, for our first box, we&#8217;ll get a 32 bit ubuntu box, we will call it
+precise32.</simpara>
+<screen>vagrant box add precise32 http://files.vagrantup.com/precise32.box</screen>
+<figure>
+<title>Adding a box</title>
+<mediaobject>
+<imageobject>
+<imagedata fileref="images/book/vagrant-box-add.png"/>
+</imageobject>
+<textobject><phrase>vagrant box add</phrase></textobject>
+</mediaobject>
+</figure>
+</section>
+<section xml:id="where_to_get_vagrant_boxes">
+<title>Where to get vagrant boxes</title>
+<simpara>Vagrant boxes are really just image files, so you can get it from any
+where  or anyone who makes their vagrant boxes available. Be careful
+when getting boxes from the internnet, make sure the site is
+reputable. Having said that, here are two popular sites that makes
+vagrant boxes available</simpara>
+<itemizedlist>
+<listitem>
+<simpara><link xl:href="http://files.vagrantup.com">http://files.vagrantup.com</link></simpara>
+</listitem>
+<listitem>
+<simpara><link xl:href="http://vagrantbox.es">http://vagrantbox.es</link></simpara>
+</listitem>
+</itemizedlist>
+</section>
+<section xml:id="deleting_and_renaming_boxes">
+<title>Deleting and Renaming Boxes</title>
+<simpara>When you longer need the OS image, you can delete the boxes in order
+to free up disk space. By the way, vagrant boxes are located in (a)
+<literal>~/.vagrant.d/boxes</literal> on macOS and Linux and (b)
+<literal>%USERHOME%\.vagrant.d\boxes</literal> on Windows machines.</simpara>
+<formalpara>
+<title>How to delete vagrant boxes</title>
+<para>
+<screen>vagrant box list
+vagrant box remove &lt;name of the box&gt;</screen>
+</para>
+</formalpara>
+<formalpara>
+<title>Renaming a  box</title>
+<para>
+<screen>vagrant box repackage</screen>
+</para>
+</formalpara>
+</section>
+<section xml:id="creating_and_publishing_a_box">
+<title>Creating and Publishing a Box</title>
+
+</section>
+</chapter>
+<chapter xml:id="vagrant_projects">
+<title>Vagrant Projects</title>
+<simpara>A vagrant box is not the same as a vagrant project. Remember that a
+box is just an image of the operating system. You can create many
+projects using the same image. But we will need a box before we can
+create project.</simpara>
+<simpara>You can use the precise32 box we downloaded earlier for multiple
+projects. This is actually one of the main use cases for vagrant. You
+can isolate the libraries and configurations of your projects. That
+way, you always have a clean baseline box.</simpara>
+<simpara>To create our first project, we need to do (a) create a folder for our
+project (b) run <literal>vagrant init</literal> inside the project folder and (c) edit
+the vagrant file if we want to alter some of the default settings of
+vagrant</simpara>
+<formalpara>
+<title>Creating a project</title>
+<para>
+<literallayout class="monospaced">mkdir ~/vms/myproject &amp;&amp; cd ~/vms/myproject
+vagrant init precise32 <co xml:id="CO1-1"/></literallayout>
+</para>
+</formalpara>
+<calloutlist>
+<callout arearefs="CO1-1">
+<para>This will create a file aptly named <literal>Vagrantfile</literal> on the folder
+where the vagrant init command was ran. For now, we will simply use
+the default Vagrant file. We will customize that file in later
+sections</para>
+</callout>
+</calloutlist>
+<section xml:id="start_suspend_resume_stop_and_destroy">
+<title>Start, Suspend, Resume, Stop and Destroy</title>
+<simpara>Start the vagrant project, we need to (a) switch to the vagrant
+project folder and (b) start the VM with the vagrant up command</simpara>
+<formalpara>
+<title>Starting a vagrant project</title>
+<para>
+<literallayout class="monospaced">cd ~/vms/myproject &amp;&amp; vagrant up</literallayout>
+</para>
+</formalpara>
+<tip>
+<simpara>If you are used to working with virtualbox and any other hypervisor,
+you might be wondering why we don&#8217;t see the usual window of
+virtualbox. Vagrant, by default runs in headless mode that is why we
+don&#8217;t see any GUI interfaces to it. You can work with the virtualbox
+GUI if you really want (need) to, but working on the CLI is the
+idiomatic way of working with vagrant.</simpara>
+</tip>
+<formalpara>
+<title>Managing vagrant boxes</title>
+<para>
+<literallayout class="monospaced">vagrant suspend  <co xml:id="CO2-1"/>
+vagrant resume <co xml:id="CO2-2"/>
+vagrant halt <co xml:id="CO2-3"/>
+vagrant destroy <co xml:id="CO2-4"/></literallayout>
+</para>
+</formalpara>
+<calloutlist>
+<callout arearefs="CO2-1">
+<para>Puts the machine to sleep mode</para>
+</callout>
+<callout arearefs="CO2-2">
+<para>Wake up from suspend</para>
+</callout>
+<callout arearefs="CO2-3">
+<para>Graceful shutdown</para>
+</callout>
+<callout arearefs="CO2-4">
+<para>This is like <literal>halt</literal>, but it also destroys the VM itself</para>
+</callout>
+</calloutlist>
+<note>
+<title>Turning the GUI on</title>
+<simpara>If you still want to see the GUI of the virtualbox session, you
+can do the following</simpara>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>Exit the existing virtual machine session, if you are in one</simpara>
+</listitem>
+<listitem>
+<simpara>Edit the Vagrantfile configuration</simpara>
+</listitem>
+<listitem>
+<simpara>Look for the config.vm.provider entry and uncomment that section</simpara>
+</listitem>
+<listitem>
+<simpara>Reload the virtual machine using the command vagrant reload</simpara>
+</listitem>
+</orderedlist>
+</note>
+</section>
+<section xml:id="getting_into_your_box">
+<title>Getting into your box</title>
+<simpara>Start the VM if it isn&#8217;t already started, then login to the virtual
+machine using <literal>vagrant ssh</literal></simpara>
+<literallayout class="monospaced">cd ~/vms/myproject &amp;&amp; vagrant up <co xml:id="CO3-1"/>
+vagrant ssh <co xml:id="CO3-2"/></literallayout>
+<calloutlist>
+<callout arearefs="CO3-1">
+<para>cd to the vagrant project and invoke <literal>vagrant up</literal> to boot the
+machine</para>
+</callout>
+<callout arearefs="CO3-2">
+<para>use ssh to login to your machine</para>
+</callout>
+</calloutlist>
+<note>
+<simpara>If you would like to use another ssh client such as PuTTy, you
+may. Login to your machine via PuTTy using <emphasis role="strong">username</emphasis>=<emphasis>vagrant</emphasis>
+<emphasis role="strong">password</emphasis>=<emphasis>vagrant</emphasis></simpara>
+</note>
 </section>
 </chapter>
 </book>

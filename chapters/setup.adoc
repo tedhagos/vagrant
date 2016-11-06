@@ -1,6 +1,21 @@
 
 == Setup
 
+Vagrant requires requires either VirtualBox, VMWare or any other
+hypervisor virtualization. In our case, we'll use VirtuaBox. The
+installation process is (a) install VirtualBox then (b) install
+Vagrant.
+
+There are a couple of ways to install these software. It depends on
+your operating system and what kind of package manager you are using.
+OSX has HomeBrew and MacPorts, Linux has aptitude, rpm, yum etc. and
+Windows has chocolatey. 
+
+The most straightforward way is to install
+virtualbox and vagrant using pre-compiled binaries. The process
+involves nothing more than downloading these binaries, double-clicking
+them and following the wizards. Just like how you would install any
+other app in your system.  
 
 === OSX
 

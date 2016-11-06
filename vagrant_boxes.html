@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Chapter 2. Vagrant Boxes</title><link rel="stylesheet" type="text/css" href="stylesheet.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="home" href="index.html" title="Vagrant" /><link rel="up" href="index.html" title="Vagrant" /><link rel="prev" href="windows.html" title="1.3. Windows" /><link rel="next" href="where_to_get_vagrant_boxes.html" title="2.2. Where to get vagrant boxes" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 2. Vagrant Boxes</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="windows.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="where_to_get_vagrant_boxes.html">Next</a></td></tr></table><hr /></div><div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a id="vagrant_boxes"></a>Chapter 2. Vagrant Boxes</h1></div></div></div><div class="toc"><p><strong>Table of Contents</strong></p><dl class="toc"><dt><span class="section"><a href="vagrant_boxes.html#adding_a_boxes">2.1. Adding a boxes</a></span></dt><dt><span class="section"><a href="where_to_get_vagrant_boxes.html">2.2. Where to get vagrant boxes</a></span></dt><dt><span class="section"><a href="deleting_and_renaming_boxes.html">2.3. Deleting and Renaming Boxes</a></span></dt><dt><span class="section"><a href="creating_and_publishing_a_box.html">2.4. Creating and Publishing a Box</a></span></dt></dl></div>
+
+<p>Working with vagrant almost always means working on the command line.
+You really need to be comfortable working on a terminal window.
+Invoking  the vagrant command shows a help file which also lists the
+most common commands like box, init, destroy, halt etc. Most of these
+commands though have their own sub-commands. It could be confusing at
+first but as you work with vagrant and get familiar with it, you’ll
+find that the commands (and sub-commands) are structured quite
+sensibly.</p>
+<p>Let’s try out our first command.</p>
+<pre class="screen">vagrant box list</pre>
+<p>The command above will show you all the boxes you already have
+downloaded in your machine.  Nothing will show up if you have just
+installed vagrant,  so let’s get our first box.</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.png" /></td><th align="left">Note</th></tr><tr><td align="left" valign="top">
+<p>A box is some sort of an operating system image. If you have
+performed complete disk backups of your operating system before, a box
+is similar to that. It is a snapshot of an operating system. Snapshots
+are taken and saved typically because you would like to restore them
+at a later time, either on the same hardware or a different one.</p>
+</td></tr></table></div>
+<div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="adding_a_boxes"></a>2.1. Adding a boxes</h2></div></div></div>
+
+<p>To get an existing box, we’ll use the vagrant box add command. The structure of
+that command looks like the one below</p>
+<pre class="screen">vagrant box add [what you want to call it] [url of box]</pre>
+<p>So, for our first box, we’ll get a 32 bit ubuntu box, we will call it
+precise32.</p>
+<pre class="screen">vagrant box add precise32 http://files.vagrantup.com/precise32.box</pre>
+<div class="figure"><a id="idm401195394992"></a><p class="title"><strong>Figure 2.1. Adding a box</strong></p><div class="figure-contents">
+
+<div class="mediaobject"><img src="images/book/vagrant-box-add.png" alt="vagrant box add" /></div>
+</div></div><br class="figure-break" />
+</div>
+
+
+
+</div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="windows.html">Prev</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="where_to_get_vagrant_boxes.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">1.3. Windows </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 2.2. Where to get vagrant boxes</td></tr></table></div></body></html>

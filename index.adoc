@@ -9,5 +9,9 @@ Ted Hagos <ted@thelogbox.com>
 v0.1, October 2016
 
 include::chapters/setup.adoc[]
+include::chapters/boxes.adoc[]
+include::chapters/vagrant-projects.adoc[]
+
+
 
 
