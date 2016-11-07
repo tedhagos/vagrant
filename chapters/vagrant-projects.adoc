@@ -84,9 +84,38 @@ vagrant ssh <2>
 machine
 <2> use ssh to login to your machine
 
-NOTE: If you would like to use another ssh client such as PuTTy, you
+TIP: If you would like to use another ssh client such as PuTTy, you
 may. Login to your machine via PuTTy using *username*=_vagrant_
 *password*=_vagrant_
+
+NOTE: Vagrant boxes tend to have a username named _vagrant_ defined
+already. The most natural and friction-less way of using vagrant is to
+simply use this default credentials. Having said that, you can use a
+credential of your choosing, you just need to do some work. It
+involves (a) creating your desired username either via the `useradd`
+command or some other admin tools (b) create your secure certificate
+and (c) make the appropriate changes to the _Vagrantfile_ so that it
+knows it shouldn't use the default `vagrant` credentials
+
+If you want to quit your vagrant session, just type `exit` at the
+prompt.
+
+.Typical vagrant session
+====
+....
+vagrant up # <1>
+vagrant ssh # <2>
+# do something productive
+exit # <3>
+vagrant halt # <4>
+....
+====
+
+<1> Boot the machine up
+<2> Login into the machine
+<3> Exit the vagrant session
+<4> Power down the machine
+
 
 
 

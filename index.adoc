@@ -1,16 +1,19 @@
-:stylesheet: style.css
 :doctype: book
 :Author Initials: TGH
-:Copyright: (c) Ted Hagos 2016
+:homepage: http://tedhagos.com
 
 
 = Vagrant
 Ted Hagos <ted@thelogbox.com>
-v0.1, October 2016
+////
+v0.1, September 2016: First Draft
+////
+v0.2, October 2016: Second Draft
 
 include::chapters/setup.adoc[]
 include::chapters/boxes.adoc[]
 include::chapters/vagrant-projects.adoc[]
+include::chapters/vagrantfile.adoc[]
 
 
 

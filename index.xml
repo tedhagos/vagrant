@@ -15,9 +15,10 @@
 <authorinitials>TGH</authorinitials>
 <revhistory>
 <revision>
-<revnumber>0.1</revnumber>
+<revnumber>0.2</revnumber>
 <date>October 2016</date>
 <authorinitials>TGH</authorinitials>
+<revremark>Second Draft</revremark>
 </revision>
 </revhistory>
 </info>
@@ -264,11 +265,79 @@ machine</para>
 <para>use ssh to login to your machine</para>
 </callout>
 </calloutlist>
-<note>
+<tip>
 <simpara>If you would like to use another ssh client such as PuTTy, you
 may. Login to your machine via PuTTy using <emphasis role="strong">username</emphasis>=<emphasis>vagrant</emphasis>
 <emphasis role="strong">password</emphasis>=<emphasis>vagrant</emphasis></simpara>
+</tip>
+<note>
+<simpara>Vagrant boxes tend to have a username named <emphasis>vagrant</emphasis> defined
+already. The most natural and friction-less way of using vagrant is to
+simply use this default credentials. Having said that, you can use a
+credential of your choosing, you just need to do some work. It
+involves (a) creating your desired username either via the <literal>useradd</literal>
+command or some other admin tools (b) create your secure certificate
+and (c) make the appropriate changes to the <emphasis>Vagrantfile</emphasis> so that it
+knows it shouldn&#8217;t use the default <literal>vagrant</literal> credentials</simpara>
 </note>
+<simpara>If you want to quit your vagrant session, just type <literal>exit</literal> at the
+prompt.</simpara>
+<example>
+<title>Typical vagrant session</title>
+<literallayout class="monospaced">vagrant up <co xml:id="CO4-1"/>
+vagrant ssh <co xml:id="CO4-2"/>
+# do something productive
+exit <co xml:id="CO4-3"/>
+vagrant halt <co xml:id="CO4-4"/></literallayout>
+</example>
+<calloutlist>
+<callout arearefs="CO4-1">
+<para>Boot the machine up</para>
+</callout>
+<callout arearefs="CO4-2">
+<para>Login into the machine</para>
+</callout>
+<callout arearefs="CO4-3">
+<para>Exit the vagrant session</para>
+</callout>
+<callout arearefs="CO4-4">
+<para>Power down the machine</para>
+</callout>
+</calloutlist>
+</section>
+</chapter>
+<chapter xml:id="vagrantfile">
+<title>Vagrantfile</title>
+<simpara><emphasis>Vagrantfile</emphasis> is a configuration file.  It was created when you issued
+the command <literal>vagrant init</literal>. It&#8217;s written in the Ruby language, so it'
+s very easy to read. There are a lot of defaults that
+are already defined in this config file. You simply need to uncomment
+them if you need to enable any particular functionality e.g. port
+forwarding etc. The Vagrantfile has a simple structure, everything is
+inside the <literal>Vagrant configure</literal> block. See the code example below</simpara>
+<example>
+<title>Vagrantfile</title>
+<literallayout class="monospaced">Vagrant configure(2) do |config|
+   # various configurations
+end</literallayout>
+</example>
+<section xml:id="port_forwarding">
+<title>Port forwarding</title>
+<example>
+<title>Snippet for port forwarding</title>
+<literallayout class="monospaced">config.vm.network "forwarded_port", guest:80,  host:8080, id: "whatever" <co xml:id="CO5-1"/><co xml:id="CO5-2"/><co xml:id="CO5-3"/></literallayout>
+</example>
+<calloutlist>
+<callout arearefs="CO5-1">
+<para><literal>guest:80</literal></para>
+</callout>
+<callout arearefs="CO5-2">
+<para><literal>host:8080</literal></para>
+</callout>
+<callout arearefs="CO5-3">
+<para><literal>id: whatever</literal></para>
+</callout>
+</calloutlist>
 </section>
 </chapter>
 </book>

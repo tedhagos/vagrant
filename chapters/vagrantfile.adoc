@@ -1,0 +1,33 @@
+== Vagrantfile
+
+_Vagrantfile_ is a configuration file.  It was created when you issued
+the command `vagrant init`. It's written in the Ruby language, so it'
+s very easy to read. There are a lot of defaults that
+are already defined in this config file. You simply need to uncomment
+them if you need to enable any particular functionality e.g. port
+forwarding etc. The Vagrantfile has a simple structure, everything is
+inside the `Vagrant configure` block. See the code example below
+
+.Vagrantfile
+====
+....
+Vagrant configure(2) do |config|
+   # various configurations
+end
+....
+====
+
+=== Port forwarding
+
+.Snippet for port forwarding
+====
+....
+config.vm.network "forwarded_port", guest:80,  host:8080, id: "whatever" # <1><2><3>
+....
+====
+
+<1> `guest:80`
+<2> `host:8080` 
+<3> `id: whatever`
+
+
