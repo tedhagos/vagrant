@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
 table.informaltable, table.table {
   border-collapse: collapse;
   margin-bottom: 2em
@@ -13,6 +14,8 @@ table.informaltable, table.table,
     padding: 4px
   }
 
+=======
+>>>>>>> 3cc538bb0c30e4a01a80fe0c75ca4fc8d3b53c7e
 .calloutlist table tbody tr td {
   vertical-align:middle !important;
 }
@@ -101,7 +104,10 @@ h1, h2, h3, h4, h5 {
   vertical-align:middle;
   padding:.2em
 }
+<<<<<<< HEAD
 
 .revhistory {
   font-size: .8em;
 }
+=======
+>>>>>>> 3cc538bb0c30e4a01a80fe0c75ca4fc8d3b53c7e

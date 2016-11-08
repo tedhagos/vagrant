@@ -12,12 +12,12 @@
 </personname>
 <email>ted@thelogbox.com</email>
 </author>
-<authorinitials>TGH</authorinitials>
+<authorinitials>tgh</authorinitials>
 <revhistory>
 <revision>
 <revnumber>0.2</revnumber>
 <date>October 2016</date>
-<authorinitials>TGH</authorinitials>
+<authorinitials>tgh</authorinitials>
 <revremark>Second Draft</revremark>
 </revision>
 </revhistory>
@@ -323,21 +323,49 @@ end</literallayout>
 </example>
 <section xml:id="_port_forwarding">
 <title>Port forwarding</title>
+<simpara>Vagrant boxes are kind of insecure out of the box. That&#8217;s why the
+<emphasis>public_network</emphasis> setting is commented by default. Think of it this
+way, a computer on a private network is usually behind a firewall
+and/or a router. Most computers on an office setting belong to this
+category. Your office workstation is not reachable from the internet
+because because it is behind a router.</simpara>
+<simpara>When you create a vagrant project, the vm is on a private network.
+That means you cannot reach any of its ports from the host machine,
+unless you define a public network. Having a vm that is not accessible
+from your host machine is not very useful, so we need a way to reach
+the applications running on the vm. One way to do it via port
+forwarding. Basically, we will map a port number on the host machine
+to a port of on the guest machine (your vm). That way, when we try to
+communicate to a port on the host machine, that request will be
+forwarded to the port of the guest machine, thus making the services
+of the guest machine reachable.</simpara>
 <example>
-<title>Snippet for port forwarding</title>
+<title>port forwarding configuration</title>
 <literallayout class="monospaced">config.vm.network "forwarded_port", guest:80,  host:8080, id: "whatever" <co xml:id="CO5-1"/><co xml:id="CO5-2"/><co xml:id="CO5-3"/></literallayout>
 </example>
 <calloutlist>
 <callout arearefs="CO5-1">
-<para><literal>guest:80</literal></para>
+<para><literal>guest:80</literal>. The vm will listen on port 80, this is usually a web
+server like Apache or NGinx or any other webserver that you want to
+use</para>
 </callout>
 <callout arearefs="CO5-2">
-<para><literal>host:8080</literal></para>
+<para><literal>host:8080</literal>. This is the port on the host machine (your actual PC
+where the vagrant is installed). When you launch a browser and go to
+<link xl:href="http://localhost:8080">http://localhost:8080</link>, you are actually hitting the port 80 of your vm</para>
 </callout>
 <callout arearefs="CO5-3">
-<para><literal>id: whatever</literal></para>
+<para><literal>id: whatever</literal>. This is optional, but it is always a good idea to
+to put an id on your port mapping definition</para>
 </callout>
 </calloutlist>
+<simpara>You can forward more than one port. If you need to open more ports on
+the guest machine, just define each mapping on its line</simpara>
+<example>
+<title>forwarding more than one port</title>
+<literallayout class="monospaced">config.vm.network "forwarded_port", guest:80,  host:8080, id: "apache"
+config.vm.network "forwarded_port", guest:4000,  host:3000, id: "node"</literallayout>
+</example>
 </section>
 </chapter>
 </book>
