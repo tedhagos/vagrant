@@ -1,4 +1,8 @@
 
+.calloutlist table tbody tr td {
+  vertical-align:middle !important;
+}
+
 body {
   font-size: 1.05em;
   background: #fbfbfb;
@@ -7,7 +11,8 @@ body {
 .toc {
   margin-bottom: 1.5em
 }
-.toc a { font-weight: normal; }
+.toc a, .list-of-examples a { font-weight: normal; }
+.list-of-examples {margin-bottom:1em;}
 
 dt {font-weight: bold;}
 dd {margin-bottom:.5em; margin-top:.5em}
@@ -36,8 +41,6 @@ pre {
   white-space: pre-wrap;   
   white-space: -moz-pre-wrap;
   white-space: -webkit-pre-wrap;
-  margin-top: .2em;
-  margin-bottom: .2em;
 }
 
 pre.programlisting {
@@ -68,7 +71,7 @@ h1, h2, h3, h4, h5 {
 
 .tip, .warning, .important, .information, .caution, .note {
   padding: 5px;
-  border: 1px dotted #dedede;
+  border: 1px solid #dedede;
   margin-bottom: 1em;
   margin-top: 1em;
   margin-left:0px !important;
@@ -77,9 +80,4 @@ h1, h2, h3, h4, h5 {
 
 .revhistory {
   font-size: .8em;
-}
-
-.mediaobject img {
-  width:100%;
-  height: auto;
 }
