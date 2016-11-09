@@ -113,7 +113,7 @@ precise32.</simpara>
 <title>Adding a box</title>
 <mediaobject>
 <imageobject>
-<imagedata fileref="images/book/vagrant-box-add.png"/>
+<imagedata fileref="images/book/vagrant-box-add.png" contentwidth="120%"/>
 </imageobject>
 <textobject><phrase>vagrant box add</phrase></textobject>
 </mediaobject>

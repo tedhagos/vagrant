@@ -42,7 +42,7 @@ vagrant box add precise32 http://files.vagrantup.com/precise32.box
 ----
 
 .Adding a box
-image::images/book/vagrant-box-add.png[]
+image::images/book/vagrant-box-add.png[width="120%"]
 
 === Where to get vagrant boxes
 
