@@ -1,0 +1,15 @@
+== Networking
+
+One of the common reasons why we run vagrant boxes is so that we can
+run server applications in them, either for testing or for
+development or something else.
+
+
+=== public networking
+
+=== private networking
+
+=== port forwarding
+
+
+
