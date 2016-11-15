@@ -1,45 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Chapter 5. Networking</title><link rel="stylesheet" type="text/css" href="stylesheet.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="home" href="index.html" title="Vagrant" /><link rel="up" href="index.html" title="Vagrant" /><link rel="prev" href="vagrantfile.html" title="Chapter 4. Vagrantfile" /><link rel="next" href="private_networking.html" title="5.2. Private networking" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 5. Networking</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="vagrantfile.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="private_networking.html">Next</a></td></tr></table><hr /></div><div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a id="networking"></a>Chapter 5. Networking</h1></div></div></div><div class="toc"><p><strong>Table of Contents</strong></p><dl class="toc"><dt><span class="section"><a href="networking.html#public_networking">5.1. Public networking</a></span></dt><dt><span class="section"><a href="private_networking.html">5.2. Private networking</a></span></dt><dt><span class="section"><a href="port_forwarding_2.html">5.3. Port forwarding</a></span></dt><dt><span class="section"><a href="using_the_vagrant_hostmanager_plugin.html">5.4. Using the vagrant-hostmanager plugin</a></span></dt></dl></div>
-
-<p>One of the common reasons why we run vagrant boxes is so that we can
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Chapter 5. Networking</title><link rel="stylesheet" type="text/css" href="stylesheet.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="home" href="index.html" title="Vagrant" /><link rel="up" href="index.html" title="Vagrant" /><link rel="prev" href="vagrantfile.html" title="Chapter 4. Vagrantfile" /><link rel="next" href="private_networking.html" title="5.2. Private networking" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 5. Networking</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="vagrantfile.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="private_networking.html">Next</a></td></tr></table><hr /></div><div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a id="networking"></a>Chapter 5. Networking</h1></div></div></div><div class="toc"><p><strong>Table of Contents</strong></p><dl class="toc"><dt><span class="section"><a href="networking.html#public_networking">5.1. Public networking</a></span></dt><dt><span class="section"><a href="private_networking.html">5.2. Private networking</a></span></dt><dt><span class="section"><a href="port_forwarding_2.html">5.3. Port forwarding</a></span></dt><dt><span class="section"><a href="using_the_vagrant_hostmanager_plugin.html">5.4. Using the vagrant-hostmanager plugin</a></span></dt></dl></div><p>One of the common reasons why we run vagrant boxes is so that we can
 run server applications in them, either for testing or for
-development or something else.</p>
-<div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="public_networking"></a>5.1. Public networking</h2></div></div></div>
-
-<p>This is known as <span class="emphasis"><em>bridge</em></span> networking. If you go for this setup, the
+development or something else. No matter what the reasons are why you
+setup vagrant, you will need a way to access the servers that are
+running on your guest machine. There are three ways to do this (1)
+setup your vm as a public network (2) set it up as private network and
+lastly (3) use port forwarding. Each of these options have their
+advantages and disadvantages. Your general security situation and
+project goals will largely determine which approach is right for you.</p><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="public_networking"></a>5.1. Public networking</h2></div></div></div><p>This is known as <span class="emphasis"><em>bridge</em></span> networking. If you go for this setup, the
 guest computer, your vm, will actually appear as another node in the
 current network segment. It will appear as another computer in your
-network neighborhood.</p>
-<div class="figure"><a id="idm135964909248"></a><p class="title"><strong>Figure 5.1. Public network configuration</strong></p><div class="figure-contents">
-
-<div class="mediaobject"><img src="images/book/public_network.png" width="324" alt="public network" /></div>
-</div></div><br class="figure-break" />
-<div class="example"><a id="idm135964906224"></a><p class="title"><strong>Example 5.1. Vagrantfile for public networking, static ip</strong></p><div class="example-contents">
-
-<pre class="literallayout">Vagrant.configure(2) do |config|
+network neighborhood.</p><div class="figure"><a id="idm45926208522608"></a><p class="title"><strong>Figure 5.1. Public network configuration</strong></p><div class="figure-contents"><div class="mediaobject"><img src="images/book/public_network.png" width="324" alt="public network" /></div></div></div><br class="figure-break" /><p>We’ll look at two ways</p><div class="tip" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Tip"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Tip]" src="images/tip.png" /></td><th align="left">Tip</th></tr><tr><td align="left" valign="top"><p>In a public network, you may be able to refer to your guest
+machine via its hostname because your DNS server might be able to pick
+up the hostname of the vm when the DHCP server gives it an IP address.
+But not when you assign a static IP address</p></td></tr></table></div><div class="example"><a id="idm45926208518192"></a><p class="title"><strong>Example 5.1. Vagrantfile for public networking, static ip</strong></p><div class="example-contents"><pre class="literallayout">Vagrant.configure(2) do |config|
    config.vm.network "public_network", ip: "192.168.1.210"
-end</pre>
-</div></div><br class="example-break" />
-<p>This type of configuration will boot up your machine and assign itself
+end</pre></div></div><br class="example-break" /><p>This type of configuration will boot up your machine and assign itself
 a static IP address of 192.168.1.210. It will appear as another node
-in the network segment.</p>
-<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Warning"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Warning]" src="images/warning.png" /></td><th align="left">Warning</th></tr><tr><td align="left" valign="top">
-<p>Consult your network administrator if it is okay to use any
+in the network segment.</p><div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Warning"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Warning]" src="images/warning.png" /></td><th align="left">Warning</th></tr><tr><td align="left" valign="top"><p>Consult your network administrator if it is okay to use any
 specific IP addresses. Most network admins configure the workstation
-endpoints to get their IP addresses dynamically from a DHCP server</p>
-</td></tr></table></div>
-<div class="example"><a id="idm135964902976"></a><p class="title"><strong>Example 5.2. Vagrantfile for public networking, dynamic ip</strong></p><div class="example-contents">
-
-<pre class="literallayout">Vagrant.configure(2) do |config|
+endpoints to get their IP addresses dynamically from a DHCP server</p></td></tr></table></div><div class="example"><a id="idm45926208515088"></a><p class="title"><strong>Example 5.2. Vagrantfile for public networking, dynamic ip</strong></p><div class="example-contents"><pre class="literallayout">Vagrant.configure(2) do |config|
    config.vm.network "public_network", type: "dhcp"
-end</pre>
-</div></div><br class="example-break" />
-<p>In this type of configuration, the guest machine will act like it is
+end</pre></div></div><br class="example-break" /><p>In this type of configuration, the guest machine will act like it is
 another node of the network segment. It will listen to any DHCP
 broadcast, if it finds any, it will fetch an IP address from the
-server.</p>
-</div>
-
-
-
-</div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="vagrantfile.html">Prev</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="private_networking.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 4. Vagrantfile </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 5.2. Private networking</td></tr></table></div></body></html>
+server.</p></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="vagrantfile.html">Prev</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="private_networking.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 4. Vagrantfile </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 5.2. Private networking</td></tr></table></div></body></html>

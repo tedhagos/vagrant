@@ -2,8 +2,13 @@
 
 One of the common reasons why we run vagrant boxes is so that we can
 run server applications in them, either for testing or for
-development or something else.
-
+development or something else. No matter what the reasons are why you
+setup vagrant, you will need a way to access the servers that are
+running on your guest machine. There are three ways to do this (1)
+setup your vm as a public network (2) set it up as private network and
+lastly (3) use port forwarding. Each of these options have their
+advantages and disadvantages. Your general security situation and
+project goals will largely determine which approach is right for you.
 
 === Public networking
 
@@ -14,6 +19,14 @@ network neighborhood.
 
 .Public network configuration
 image::images/book/public_network.png[width=60%]
+
+We'll look at two ways 
+
+TIP: In a public network, you may be able to refer to your guest
+machine via its hostname because your DNS server might be able to pick
+up the hostname of the vm when the DHCP server gives it an IP address.
+But not when you assign a static IP address
+
 
 .Vagrantfile for public networking, static ip
 ====
@@ -47,10 +60,33 @@ server.
 
 === Private networking
 
+When you setup your guest machine as a private network, it will only
+be accessible from the host machine. No other machine in your network
+can reach it. This is probably the safest and most secure usage of a
+vagrant box
+
 .Private network configuration
 image::images/book/private_network.png[width=60%]
 
+
+
 === Port forwarding
+
+Private networking works best if you only need to access the vm from
+the host. However, there are situations when you need other machines
+in your network to gain access to the vm. Before you go to public
+networking, you might want to consider port forwarding because it is
+possible to let other machines gain access to the vm without totally
+exposing the guest machine. Think of the port forwarding option as a
+combination of public and private networking. We get to select which
+application services (ports) we will expose to the public. The ports
+are not *all* exposed as a default.
+
+
+
+
+
+
 
 === Using the vagrant-hostmanager plugin
 
