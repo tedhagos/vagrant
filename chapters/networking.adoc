@@ -5,11 +5,58 @@ run server applications in them, either for testing or for
 development or something else.
 
 
-=== public networking
+=== Public networking
 
-=== private networking
+This is known as _bridge_ networking. If you go for this setup, the
+guest computer, your vm, will actually appear as another node in the
+current network segment. It will appear as another computer in your
+network neighborhood. 
 
-=== port forwarding
+.Public network configuration
+image::images/book/public_network.png[width=60%]
+
+.Vagrantfile for public networking, static ip
+====
+....
+Vagrant.configure(2) do |config|
+   config.vm.network "public_network", ip: "192.168.1.210" 
+end
+....
+====
+This type of configuration will boot up your machine and assign itself
+a static IP address of 192.168.1.210. It will appear as another node
+in the network segment.
+
+WARNING: Consult your network administrator if it is okay to use any
+specific IP addresses. Most network admins configure the workstation
+endpoints to get their IP addresses dynamically from a DHCP server
+
+
+.Vagrantfile for public networking, dynamic ip
+====
+....
+Vagrant.configure(2) do |config|
+   config.vm.network "public_network", type: "dhcp" 
+end
+....
+====
+In this type of configuration, the guest machine will act like it is
+another node of the network segment. It will listen to any DHCP
+broadcast, if it finds any, it will fetch an IP address from the
+server.
+
+=== Private networking
+
+.Private network configuration
+image::images/book/private_network.png[width=60%]
+
+=== Port forwarding
+
+=== Using the vagrant-hostmanager plugin
+
+- Why
+- How
+
 
 
 

@@ -368,4 +368,77 @@ config.vm.network "forwarded_port", guest:4000,  host:3000, id: "node"</literall
 </example>
 </section>
 </chapter>
+<chapter xml:id="networking">
+<title>Networking</title>
+<simpara>One of the common reasons why we run vagrant boxes is so that we can
+run server applications in them, either for testing or for
+development or something else.</simpara>
+<section xml:id="public_networking">
+<title>Public networking</title>
+<simpara>This is known as <emphasis>bridge</emphasis> networking. If you go for this setup, the
+guest computer, your vm, will actually appear as another node in the
+current network segment. It will appear as another computer in your
+network neighborhood.</simpara>
+<figure>
+<title>Public network configuration</title>
+<mediaobject>
+<imageobject>
+<imagedata fileref="images/book/public_network.png" contentwidth="60%"/>
+</imageobject>
+<textobject><phrase>public network</phrase></textobject>
+</mediaobject>
+</figure>
+<example>
+<title>Vagrantfile for public networking, static ip</title>
+<literallayout class="monospaced">Vagrant.configure(2) do |config|
+   config.vm.network "public_network", ip: "192.168.1.210"
+end</literallayout>
+</example>
+<simpara>This type of configuration will boot up your machine and assign itself
+a static IP address of 192.168.1.210. It will appear as another node
+in the network segment.</simpara>
+<warning>
+<simpara>Consult your network administrator if it is okay to use any
+specific IP addresses. Most network admins configure the workstation
+endpoints to get their IP addresses dynamically from a DHCP server</simpara>
+</warning>
+<example>
+<title>Vagrantfile for public networking, dynamic ip</title>
+<literallayout class="monospaced">Vagrant.configure(2) do |config|
+   config.vm.network "public_network", type: "dhcp"
+end</literallayout>
+</example>
+<simpara>In this type of configuration, the guest machine will act like it is
+another node of the network segment. It will listen to any DHCP
+broadcast, if it finds any, it will fetch an IP address from the
+server.</simpara>
+</section>
+<section xml:id="private_networking">
+<title>Private networking</title>
+<figure>
+<title>Private network configuration</title>
+<mediaobject>
+<imageobject>
+<imagedata fileref="images/book/private_network.png" contentwidth="60%"/>
+</imageobject>
+<textobject><phrase>private network</phrase></textobject>
+</mediaobject>
+</figure>
+</section>
+<section xml:id="port_forwarding_2">
+<title>Port forwarding</title>
+
+</section>
+<section xml:id="using_the_vagrant_hostmanager_plugin">
+<title>Using the vagrant-hostmanager plugin</title>
+<itemizedlist>
+<listitem>
+<simpara>Why</simpara>
+</listitem>
+<listitem>
+<simpara>How</simpara>
+</listitem>
+</itemizedlist>
+</section>
+</chapter>
 </book>
