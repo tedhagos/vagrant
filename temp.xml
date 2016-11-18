@@ -453,6 +453,24 @@ exposing the guest machine. Think of the port forwarding option as a
 combination of public and private networking. We get to select which
 application services (ports) we will expose to the public. The ports
 are not <emphasis role="strong">all</emphasis> exposed as a default.</simpara>
+<example>
+<title>Port forwarding configuration</title>
+<literallayout class="monospaced">Vagrant.configure(2) do |config|
+  config.vm.network "forwarded_port", guest:80, host:8080 <co xml:id="CO6-1"/> <co xml:id="CO6-2"/>
+end</literallayout>
+</example>
+<calloutlist>
+<callout arearefs="CO6-1">
+<para><literal>guest:80</literal> means that an application on the vm, the guest OS, is
+bound to port 80</para>
+</callout>
+<callout arearefs="CO6-2">
+<para><literal>host:8080</literal> means that if a client like a web browser on your
+actual machine, the host, goes to <emphasis><link xl:href="http://localhost:8080">http://localhost:8080</link></emphasis>, that
+request will be forwarded to the application on the vm that is
+listening on port 80</para>
+</callout>
+</calloutlist>
 </section>
 <section xml:id="_using_the_vagrant_hostmanager_plugin">
 <title>Using the vagrant-hostmanager plugin</title>

@@ -82,10 +82,20 @@ combination of public and private networking. We get to select which
 application services (ports) we will expose to the public. The ports
 are not *all* exposed as a default.
 
-
-
-
-
+.Port forwarding configuration
+====
+....
+Vagrant.configure(2) do |config|
+  config.vm.network "forwarded_port", guest:80, host:8080 <1> <2>
+end
+....
+====
+<1> `guest:80` means that an application on the vm, the guest OS, is
+bound to port 80
+<2> `host:8080` means that if a client like a web browser on your
+actual machine, the host, goes to _http://localhost:8080_, that
+request will be forwarded to the application on the vm that is
+listening on port 80
 
 
 === Using the vagrant-hostmanager plugin
